@@ -1,0 +1,4 @@
+*:focus {
+  outline: none !important;
+  /*esto lo haga para sacar el remarcado feo por defecto al hacer foco en algún elemento*/
+}
