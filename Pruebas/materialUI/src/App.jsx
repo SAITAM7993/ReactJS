@@ -6,22 +6,32 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import Random from './components/Random/Random';
+//import Random from './components/Random/Random';
 
 import './App.css';
+//mi tema personalizado
+
+import { Container, ThemeProvider } from '@mui/material';
+import ThemeBlack from './themes/ThemeBlack';
+import NavBar from './components/NavBar/NavBar';
 
 const App = () => {
   //const [count, setCount] = useState(0)
 
   return (
     <>
-      <Random></Random>
-      {/* ; componente con varias pruebas*/}
-      {/* NUEVAS PRUEBAS, navbar con un drawer, menu que se abre al costado */}
+      <ThemeProvider theme={ThemeBlack}>
+        <Container sx={{ mt: 5 }}>
+          <NavBar></NavBar>
+        </Container>
+      </ThemeProvider>
     </>
   );
 };
 /*
+ <Random></Random> 
+componente con varias pruebas
+NUEVAS PRUEBAS, navbar con un drawer, menu que se abre al costado 
 NOTAS****************************
 -para aplicar el tema se debe englobar lo que querramos dentro de ThemeProvider
 -ButtonGroup es una agrupacion de botones, le podemos dar el estilo en ese padre y los botones tendran ese estilo
