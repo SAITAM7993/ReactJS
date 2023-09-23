@@ -1,4 +1,4 @@
-//importo el listDrawer para usar en el navbar
+import * as React from 'react';
 import {
   AppBar,
   Button,
@@ -10,34 +10,44 @@ import {
 } from '@mui/material';
 
 import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LoginIcon from '@mui/icons-material/Login'; //CAMBIAR LUEGO
 
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import NavListDrawer from './NavListDrawer';
 
+import CartWidget from '../CartWidget/CartWidget';
+
+/******************** PARM ENTRADA DE NAVBAR ********************/
 //lista de objetos link para user en el navlist
-const navLinks = [
+export const navLinks = [
   {
-    title: 'Home',
+    title: 'HOME',
     path: '#',
     icon: <HomeIcon />,
   },
   {
-    title: 'Login',
+    title: 'NEW',
     path: '#login',
     icon: <LoginIcon />,
   },
   {
-    title: 'Register',
-    path: '#register',
-    icon: <HowToRegIcon />,
+    title: 'SALE',
+    path: '#login',
+    icon: <LoginIcon />,
   },
 ];
 
-export default function NavBar() {
+//brand de la tienda
+export const brand = 'F-STORE';
+
+/******************** PARM ENTRADA DE NAVBAR - FIN ********************/
+
+const NavBar = () => {
   const [open, setOpen] = useState(false);
+  {
+    /* para menejar la apertura del drawer */
+  }
   return (
     <>
       <AppBar position='fixed'>
@@ -55,20 +65,27 @@ export default function NavBar() {
             sx={{ flexGrow: 1 }}
           >
             {/* flexGrow 1 hace que el crecimiento sea el maximo posible, eso empuja todo el resto a la derecha */}
-            MENU
+            {brand} {/* le paso la marca */}
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {/* con esto lo oculto cuando es MUY pequeño (mobile) y lo muestro cuando es mas grande (sm), lo uso tambien en menuicon para ocultarlo en vistas desktop pero invertido*/}
+          <Box
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+            }}
+          >
+            {/* con esto lo oculto cuando es MUY pequeño (mobile) y lo muestro cuando es mas grande (sm), lo uso tambien en menuicon para ocultarlo en vistas desktop pero invertido, abajo recorro los navlinks que le pase y los cargo*/}
             {navLinks.map((item) => (
               <Button
+                size='small'
                 color='inherit'
                 key={item.title}
                 component='a'
                 href={item.path}
+                sx={{ mx: 2 }}
               >
                 {item.title}
               </Button>
             ))}
+            <CartWidget />
           </Box>
         </Toolbar>
         {/* todo lo que se le ponga en toolbar va a ser con flex pegado uno al lado del otro*/}
@@ -88,7 +105,7 @@ export default function NavBar() {
       {/* <NavListDrawer/> */}
     </>
   );
-}
+};
 //onClick es para que haga algo al clickear (evento onClick)
 //el usestate setea el open en true en el onclick, el drawer ve esa variable y la usa para mostrar o no el drawer que contiene el navlistdrawer
 //anchor es para decirle en donde va a aparecer y el onClose es para que cuando se de click en otro lado se cierre seteando el open en false
@@ -103,3 +120,4 @@ export default function NavBar() {
           ))}
 con esto recorro y creo un button con cada titulo de la lista de titulos
 */
+export default NavBar;
