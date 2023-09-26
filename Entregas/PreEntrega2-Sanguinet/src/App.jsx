@@ -6,12 +6,11 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 //componentes mui
-import { Button, Container, Typography, ThemeProvider } from '@mui/material'; //de esta manera puedo importar varios a la vez
-
+import { Container, ThemeProvider } from '@mui/material'; //de esta manera puedo importar varios a la vez
 //componentes personalizados
 import NavBar from './components/NavBar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-
+import Header from './components/Header/Header';
 //mi tema personalizado
 import theme from './theme/theme';
 import './App.css';
@@ -23,22 +22,15 @@ const App = () => {
       <ThemeProvider theme={theme}>
         {/*para importar un tema necesito esto y envolver todo lo que quiera con ese tema, theme es el nombre de mi tema*/}
         <NavBar />
-        <Container maxWidth=''>
-          {/*es un contenedor, le puedo pasar el tamaño MAXIMO */}
-          <ItemListContainer greeting='Bienvenidos a la tienda' />
-          <Typography variant='body1'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius,
-            debitis animi? Nemo ipsa, repellendus voluptatem dignissimoslibero
-            molestias commodi earum? In maxime cum facere fugiat a sint vel
-            consequatur totam!
-          </Typography>
-          <Button
-            variant='contained'
-            size='large'
-          >
-            Comprar
-          </Button>
+        <Header
+          title={'F-STORE'}
+          subtitle={'All you need in one place'}
+        />
+        <Container maxWidth='lg'>
+          <ItemListContainer category='All' />
         </Container>
+
+        {/* </Container> */}
       </ThemeProvider>
       ;
     </>

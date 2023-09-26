@@ -7,15 +7,14 @@ const CartWidget = () => {
   return (
     <>
       {/* para poner un tooltip tengo que englobar el icono que quiero tooltipear */}
-      <Tooltip title='Carrito'>
+      <Tooltip title='Cart'>
         <IconButton
-          disablePadding
           aria-label='show 4 new mails'
           color='inherit'
         >
           <Badge
             badgeContent={4}
-            color='error'
+            color='secondary'
           >
             <ShoppingCart />
           </Badge>

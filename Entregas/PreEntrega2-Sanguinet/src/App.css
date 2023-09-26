@@ -2,3 +2,34 @@
   outline: none !important;
   /*esto lo haga para sacar el remarcado feo por defecto al hacer foco en algún elemento*/
 }
+
+/*CARDS*/
+.card__Img {
+  object-fit: scale-down !important; /*esto para que las cards puedan achicar la img y queden bien*/
+  width: 200px;
+  height: 350px;
+
+  /*padding: 60px;*/
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+/* offset-x | offset-y | blur-radius | spread-radius | color */
+.card:hover {
+  box-shadow: 3px 3px 20px 1px rgba(67, 0, 137, 0.1);
+}
+.card__body {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

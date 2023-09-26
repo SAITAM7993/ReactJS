@@ -6,7 +6,6 @@ import {
   ListItemButton,
   ListItemIcon,
 } from '@mui/material';
-
 import CloseIcon from '@mui/icons-material/Close';
 import CartWidget from '../CartWidget/CartWidget';
 import IconButton from '@mui/material/IconButton';
@@ -16,6 +15,17 @@ const NavListDrawer = ({ navLinks }) => {
     <Box sx={{ width: 250 }}>
       <nav>
         <List>
+          <ListItem
+            disablePadding
+            key='CartWidget'
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <CartWidget /> {/* icono para cerrar */}
+              </ListItemIcon>
+              <ListItemText>CART</ListItemText>
+            </ListItemButton>
+          </ListItem>
           {navLinks.map((item) => (
             <ListItem
               disablePadding
@@ -36,18 +46,6 @@ const NavListDrawer = ({ navLinks }) => {
 
           <ListItem
             disablePadding
-            key='CartWidget'
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <CartWidget /> {/* icono para cerrar */}
-              </ListItemIcon>
-              <ListItemText>CARRITO</ListItemText>
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem
-            disablePadding
             key='DrawerCloseButton'
           >
             <ListItemButton>
@@ -56,7 +54,7 @@ const NavListDrawer = ({ navLinks }) => {
                   <CloseIcon /> {/* icono para cerrar */}
                 </IconButton>
               </ListItemIcon>
-              <ListItemText>CERRAR</ListItemText>
+              <ListItemText>CLOSE</ListItemText>
             </ListItemButton>
           </ListItem>
         </List>

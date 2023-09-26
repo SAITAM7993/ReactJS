@@ -10,11 +10,12 @@ const theme = createTheme({
       main: '#000000',
     },
     secondary: {
-      main: '#f50057',
+      main: '#595591',
+    },
+    success: {
+      main: '#82ffa1',
     },
   },
 });
 
 export default theme;
-
-
