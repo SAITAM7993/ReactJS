@@ -2,19 +2,27 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ReadMoreIcon from '@mui/icons-material/ReadMore';
-
+import ItemCount from '../ItemCount/ItemCount';
+import './ProductCard.css'; //de esta manera se improta CSS
 /*
 product items
-id:1,
-title:'...',
-price:'...',
-category:'...',
-description:'...',
-image:'...'
+{
+    "id": 4,
+    "title": "Handmade Fresh Table",
+    "price": 687,
+    "description": "Andy shoes are designed to keeping in...",
+    "category": {
+      "id": 5,
+      "name": "Others",
+      "image": "https://placeimg.com/640/480/any?r=0.591926261873231"
+    },
+    "images": [
+      "https://placeimg.com/640/480/any?r=0.9178516507833767",
+      "https://placeimg.com/640/480/any?r=0.9300320592588625",
+      "https://placeimg.com/640/480/any?r=0.8807778235430017"
+    ]
+  }
                      */
 
 const ProductCard = ({ product }) => {
@@ -23,7 +31,7 @@ const ProductCard = ({ product }) => {
       className='card'
       sx={{
         boxShadow: 0,
-        maxWidth: 280,
+        maxWidth: 320,
         height: '100%',
       }}
     >
@@ -32,18 +40,25 @@ const ProductCard = ({ product }) => {
         component='img'
         alt={product.title}
         height='auto'
-        image={product.image}
+        image={product.images[0]}
       />
 
       <CardContent className='card__body'>
         <Typography
           gutterBottom
           variant='body1'
-          component='div'
+          component='p'
         >
           {product.title}
         </Typography>
-
+        <Typography
+          gutterBottom
+          variant='body2'
+          component='p'
+          color='text.secondary'
+        >
+          {product.category.name}
+        </Typography>
         <Typography
           sx={{
             overflow: 'hidden',
@@ -60,7 +75,7 @@ const ProductCard = ({ product }) => {
 
         <Typography
           color='secondary'
-          mt={3}
+          mt={2}
           variant='h5'
           component='div'
         >
@@ -68,10 +83,13 @@ const ProductCard = ({ product }) => {
         </Typography>
       </CardContent>
 
-      <CardActions
-        className='card__actions'
-        alignItems='flex-end'
-      >
+      <CardActions>
+        <ItemCount
+          initial={1}
+          stock={10}
+          onAdd={(quantity) => console.log('cantidad agregada ', quantity)}
+        />
+        {/*
         <Button
           sx={{ boxShadow: 'none', width: '100%' }}
           size='small'
@@ -86,6 +104,7 @@ const ProductCard = ({ product }) => {
           variant='contained'
           startIcon={<ReadMoreIcon />}
         ></Button>
+         */}
       </CardActions>
     </Card>
   );

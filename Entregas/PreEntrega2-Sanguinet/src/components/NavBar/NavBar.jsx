@@ -29,12 +29,27 @@ export const navLinks = [
     icon: <HomeIcon />,
   },
   {
-    title: 'NEW',
+    title: 'CLOTHES',
     path: '#login',
     icon: <LoginIcon />,
   },
   {
-    title: 'SALE',
+    title: 'ELECTRONICS',
+    path: '#login',
+    icon: <LoginIcon />,
+  },
+  {
+    title: 'FORNITURE',
+    path: '#login',
+    icon: <LoginIcon />,
+  },
+  {
+    title: 'SHOES ',
+    path: '#login',
+    icon: <LoginIcon />,
+  },
+  {
+    title: 'OTHERS ',
     path: '#login',
     icon: <LoginIcon />,
   },
@@ -56,7 +71,7 @@ const NavBar = () => {
         <Toolbar>
           <Typography
             variant='h6'
-            sx={{ flexGrow: 1 }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}
           >
             {/* flexGrow 1 hace que el crecimiento sea el maximo posible, eso empuja todo el resto a la derecha */}
             {brand} {/* le paso la marca */}
@@ -70,6 +85,7 @@ const NavBar = () => {
                 key={item.title}
                 component='a'
                 href={item.path}
+                sx={{ mx: 1 }}
               >
                 {item.title}
               </Button>

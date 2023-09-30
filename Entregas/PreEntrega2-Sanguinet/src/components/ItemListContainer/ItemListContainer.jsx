@@ -1,15 +1,28 @@
+/* Este componente llama a la api para obtener la lista de productos, llama a ProductCard y los lista en una grilla */
+
 import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import ProductCard from '../ProductCard/ProductCard';
 import Grid from '@mui/material/Grid';
+import { getProducts } from '../../api/getProducts';
+//importo url de .env para no exponer la url
 
 const ItemListContainer = ({ category }) => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    getProducts(category).then((products) => setProducts(products)); //la guardo en useState de productos "products"
+  }, [category]);
+  /*
+  if (parseInt(category) != 0) {
+    url += `/?categoryId=${category}`;
+  }
+  useEffect(() => {
+    fetch(url)
       .then((response) => response.json()) //obtengo la respuesta de la api
       .then((products) => setProducts(products)); //la guardo en useState de productos "products"
   }, []);
+  */
 
   return (
     <>
@@ -18,14 +31,15 @@ const ItemListContainer = ({ category }) => {
         textAlign='left'
         variant='h2'
       >
-        {category}
+        {category === 0 && 'All'}
+        {/* si categoria = 0 entonces son todos los productos */}
       </Typography>
       <Grid
         container
         className='ProductList'
         display='flex'
         justifyContent='center'
-        spacing={5}
+        spacing={3}
       >
         {products.map((product) => {
           return (

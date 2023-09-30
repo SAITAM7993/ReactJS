@@ -38,7 +38,7 @@ const Header = ({ title, subtitle }) => {
       >
         <CustomBox>
           <Box
-            m={20}
+            m={10}
             sx={{ flexGrow: 1 }}
           >
             <Subtitle
