@@ -1,28 +1,21 @@
-/* Este componente llama a la api para obtener la lista de productos, llama a ProductCard y los lista en una grilla */
+/* Este componente llama a la api para obtener la lista de productos, llama a ItemList que carga las cards y los lista en una grilla */
 
 import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
-import ProductCard from '../ProductCard/ProductCard';
 import Grid from '@mui/material/Grid';
 import { getProducts } from '../../api/getProducts';
+import ItemList from '../ItemList/ItemList';
+import Loader from '../Loader/Loader';
 //importo url de .env para no exponer la url
 
 const ItemListContainer = ({ category }) => {
   const [products, setProducts] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    getProducts(category).then((products) => setProducts(products)); //la guardo en useState de productos "products"
+    getProducts(category)
+      .then((products) => setProducts(products)) //la guardo en useState de productos "products"
+      .finally(setIsLoading(false)); //luego de que obtengo los datos seteo loading en false porque ya cargó
   }, [category]);
-  /*
-  if (parseInt(category) != 0) {
-    url += `/?categoryId=${category}`;
-  }
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json()) //obtengo la respuesta de la api
-      .then((products) => setProducts(products)); //la guardo en useState de productos "products"
-  }, []);
-  */
 
   return (
     <>
@@ -41,24 +34,7 @@ const ItemListContainer = ({ category }) => {
         justifyContent='center'
         spacing={3}
       >
-        {products.map((product) => {
-          return (
-            <Grid
-              item
-              container
-              direction='column'
-              display='flex'
-              justify='center'
-              lg={3}
-              md={4}
-              sm={6}
-              xs={12}
-              key={product.id}
-            >
-              <ProductCard product={product} />
-            </Grid>
-          );
-        })}
+        {isLoading ? <Loader /> : <ItemList products={products} />}
       </Grid>
     </>
   );

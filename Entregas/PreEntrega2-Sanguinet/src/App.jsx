@@ -26,7 +26,7 @@ const App = () => {
           title={'F-STORE'}
           subtitle={'All you need in one place'}
         />
-        <Container maxWidth='xl'>
+        <Container maxWidth='lg'>
           <ItemListContainer category={0} />
         </Container>
 
