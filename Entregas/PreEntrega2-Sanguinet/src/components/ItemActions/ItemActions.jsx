@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import { Button, Typography, Stack } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import InfoIcon from '@mui/icons-material/Info';
-import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
-const ItemActions = ({ id, stock, initial, onAdd }) => {
+const ItemActions = ({ stock, initial, onAdd }) => {
   const [quantity, setQuantity] = useState(initial);
-
-  //para manejar el modal de detalle de producto
-  const [showItemDetail, setShowItemDetail] = useState(false);
-  function showItemDetailHandler() {
-    setShowItemDetail(!showItemDetail);
-  }
 
   const increment = () => {
     //si la cantidad es menor a la del stock le dejo agregar
@@ -61,22 +53,6 @@ const ItemActions = ({ id, stock, initial, onAdd }) => {
           onClick={decrement}
         >
           -
-        </Button>
-        <Button
-          variant='contained'
-          size='small'
-          color='success'
-          sx={{ boxShadow: 'none', flexGrow: 1 }}
-          startIcon={<InfoIcon />}
-          onClick={showItemDetailHandler}
-        >
-          {showItemDetail ? (
-            <ItemDetailContainer
-              id={id}
-              open={showItemDetail}
-            />
-          ) : null}
-          {/* con esto abriria el detalle del producto seleccionado */}
         </Button>
         <Button
           variant='contained'

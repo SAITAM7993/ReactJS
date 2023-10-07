@@ -1,31 +1,75 @@
 import Typography from '@mui/material/Typography';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ItemActions from '../ItemActions/ItemActions';
 
-const ItemDetail = ({ title, price, description }) => {
+import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+
+const ItemDetail = ({ product }) => {
   return (
     <>
-      <Typography
-        variant='h5'
-        color='initial'
-        component='p'
-        my={2}
-      >
-        {title}
-      </Typography>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          spacing={2}
+          direction='column'
+          alignItems='center'
+          justifyContent='center'
+        >
+          <Grid item>
+            <Typography
+              variant='h4'
+              color='initial'
+              component='p'
+              my={2}
+            >
+              {product.title}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant='body1'
+              color='initial'
+              my={2}
+            >
+              {product.description}
+            </Typography>
+          </Grid>
 
-      <Typography
-        variant='body2'
-        color='initial'
-        my={2}
-      >
-        {description}
-      </Typography>
-      <Typography
-        variant='h5'
-        color='initial'
-        component='p'
-      >
-        ${price}
-      </Typography>
+          <Grid item>
+            <ImageList cols={3}>
+              {/* con este op ternario espero a que cargue la img y luego la renderizo, sino rompia  */}
+              {product.images &&
+                product.images.map((image) => (
+                  <ImageListItem key={image.img}>
+                    <img src={image}></img>
+                  </ImageListItem>
+                ))}
+            </ImageList>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant='h4'
+              color='initial'
+              component='p'
+              my={2}
+            >
+              ${product.price}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xl={3}
+          >
+            <ItemActions
+              initial={1}
+              stock={10}
+              onAdd={(quantity) => console.log('cantidad agregada ', quantity)}
+            />
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 };

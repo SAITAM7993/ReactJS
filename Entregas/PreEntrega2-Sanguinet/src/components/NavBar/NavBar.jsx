@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Button,
   Drawer,
   Toolbar,
   IconButton,
@@ -8,14 +7,13 @@ import {
   Box,
 } from '@mui/material';
 
-import HomeIcon from '@mui/icons-material/Home';
+import './NavBar.css';
+import { Link } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login'; //CAMBIAR LUEGO
 import SearchIcon from '@mui/icons-material/Search';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import NavListDrawer from './NavListDrawer';
-
 import CartWidget from '../CartWidget/CartWidget';
 
 import { Search, SearchIconWrapper, StyledInputBase } from './NavBarSearch';
@@ -24,33 +22,33 @@ import { Search, SearchIconWrapper, StyledInputBase } from './NavBarSearch';
 //lista de objetos link para user en el navlist
 export const navLinks = [
   {
-    title: 'HOME',
-    path: '#',
-    icon: <HomeIcon />,
+    title: 'ALL',
+    path: '/category/0',
+    icon: <LoginIcon />,
   },
   {
     title: 'CLOTHES',
-    path: '#login',
+    path: '/category/1',
     icon: <LoginIcon />,
   },
   {
     title: 'ELECTRONICS',
-    path: '#login',
+    path: '/category/2',
     icon: <LoginIcon />,
   },
   {
     title: 'FORNITURE',
-    path: '#login',
+    path: '/category/3',
     icon: <LoginIcon />,
   },
   {
     title: 'SHOES ',
-    path: '#login',
+    path: '/category/4',
     icon: <LoginIcon />,
   },
   {
     title: 'OTHERS ',
-    path: '#login',
+    path: '/category/5',
     icon: <LoginIcon />,
   },
 ];
@@ -73,22 +71,20 @@ const NavBar = () => {
             variant='h6'
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}
           >
-            {/* flexGrow 1 hace que el crecimiento sea el maximo posible, eso empuja todo el resto a la derecha */}
-            {brand} {/* le paso la marca */}
+            <Link to='/'>
+              {/* flexGrow 1 hace que el crecimiento sea el maximo posible, eso empuja todo el resto a la derecha */}
+              {brand} {/* le paso la marca */}
+            </Link>
           </Typography>
+
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {/* con esto lo oculto cuando es MUY pequeño (mobile) y lo muestro cuando es mas grande (sm), lo uso tambien en menuicon para ocultarlo en vistas desktop pero invertido, abajo recorro los navlinks que le pase y los cargo*/}
             {navLinks.map((item) => (
-              <Button
-                size='small'
-                color='inherit'
-                key={item.title}
-                component='a'
-                href={item.path}
-                sx={{ mx: 1 }}
-              >
-                {item.title}
-              </Button>
+              <Link
+                className='li'
+                key={`${item.title}`}
+                to={`${item.path}`}
+              >{`${item.title}`}</Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: 1, display: 'flex' }}>

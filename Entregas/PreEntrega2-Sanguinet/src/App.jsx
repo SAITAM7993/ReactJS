@@ -9,29 +9,56 @@ import '@fontsource/roboto/700.css';
 import { Container, ThemeProvider } from '@mui/material'; //de esta manera puedo importar varios a la vez
 //componentes personalizados
 import NavBar from './components/NavBar/NavBar';
-import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import Header from './components/Header/Header';
 //mi tema personalizado
 import theme from './theme/theme';
 import './App.css';
 
+//REACT ROUTER DOM
+//con el as renombro con un alias
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+//PAGES (importo paginas)
+//import DetailPage from './pages/DetailPage/DetailPage';
+
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+//import NotFound from './pages/ErrorPage/NotFound';
+
 const App = () => {
   //const [count, setCount] = useState(0)
   return (
     <>
-      <ThemeProvider theme={theme}>
-        {/*para importar un tema necesito esto y envolver todo lo que quiera con ese tema, theme es el nombre de mi tema*/}
-        <NavBar />
-        <Header
-          title={'F-STORE'}
-          subtitle={'All you need in one place'}
-        />
-        <Container maxWidth='lg'>
-          <ItemListContainer category={0} />
-        </Container>
+      <Router>
+        <ThemeProvider theme={theme}>
+          {/*para importar un tema necesito esto y envolver todo lo que quiera con ese tema, theme es el nombre de mi tema*/}
+          <NavBar />
+          <Header
+            title={'F-STORE'}
+            subtitle={'All you need in one place'}
+          />
 
-        {/* </Container> */}
-      </ThemeProvider>
+          <Container maxWidth='lg'>
+            <Routes>
+              <Route
+                path='/'
+                element={<ItemListContainer />}
+              />
+
+              <Route
+                path='/category/:categoryId'
+                element={<ItemListContainer />}
+              />
+              <Route
+                path='/detail/:id'
+                element={<ItemDetailContainer />}
+              />
+            </Routes>
+          </Container>
+
+          {/* </Container> */}
+        </ThemeProvider>
+      </Router>
       ;
     </>
   );
