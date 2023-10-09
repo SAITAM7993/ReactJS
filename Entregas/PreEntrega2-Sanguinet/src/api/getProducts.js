@@ -1,4 +1,4 @@
-const url = import.meta.env.VITE_API_URL; //url base
+const url = 'https://api.escuelajs.co/api/v1/products'; //import.meta.env.VITE_API_URL; //url base
 //obtengo el producto a devolver
 export const getProducts = async () => {
   try {

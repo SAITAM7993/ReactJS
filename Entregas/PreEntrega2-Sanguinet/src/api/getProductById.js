@@ -1,5 +1,6 @@
-const baseUrl = import.meta.env.VITE_API_URL;
-//url base + url cateogira
+const baseUrl = 'https://api.escuelajs.co/api/v1/products'; //import.meta.env.VITE_API_URL;
+
+//url base
 export const getProductById = async (productId) => {
   let url = baseUrl + '/' + productId;
   try {
