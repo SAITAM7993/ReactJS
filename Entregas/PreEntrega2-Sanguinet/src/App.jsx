@@ -50,7 +50,7 @@ const App = () => {
                 element={<ItemListContainer />}
               />
               <Route
-                path='/detail/:id'
+                path='/item/:id'
                 element={<ItemDetailContainer />}
               />
             </Routes>

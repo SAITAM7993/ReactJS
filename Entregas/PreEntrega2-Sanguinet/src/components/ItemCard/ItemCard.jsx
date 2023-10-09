@@ -19,7 +19,7 @@ const ProductCard = ({
   return (
     <Link
       key={`product-${id}`}
-      to={`/detail/${id}`}
+      to={`/item/${id}`}
     >
       <Card
         className='card__custom'
@@ -30,11 +30,10 @@ const ProductCard = ({
         <CardMedia
           className='card__Img'
           component='img'
-          alt={id}
+          alt={`product-${id}`}
           height='auto'
           image={image}
         />
-
         <CardContent className='card__body'>
           <Typography
             gutterBottom
@@ -82,7 +81,6 @@ const ProductCard = ({
             ${price}
           </Typography>
         </CardContent>
-
         <CardActions className='card__actions'>
           <ItemActions
             initial={1}
