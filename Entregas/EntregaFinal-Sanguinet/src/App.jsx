@@ -10,6 +10,7 @@ import { Container, ThemeProvider } from '@mui/material'; //de esta manera puedo
 //componentes personalizados
 import NavBar from './components/NavBar/NavBar';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 //mi tema personalizado
 import theme from './theme/theme';
 import './App.css';
@@ -18,11 +19,12 @@ import './App.css';
 //con el as renombro con un alias
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-//PAGES (importo paginas)
-//import DetailPage from './pages/DetailPage/DetailPage';
-
+//importo context
+import { CartProvider } from './context/CartContext';
+// import { ItemsProvider } from './context/ItemsContext';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+import Cart from './components/CheckOut/Cart';
 //import NotFound from './pages/ErrorPage/NotFound';
 
 const App = () => {
@@ -30,36 +32,44 @@ const App = () => {
   return (
     <>
       <Router>
-        <ThemeProvider theme={theme}>
-          {/*para importar un tema necesito esto y envolver todo lo que quiera con ese tema, theme es el nombre de mi tema*/}
-          <NavBar />
-          <Header
-            title={'F-STORE'}
-            subtitle={'All you need in one place'}
-          />
+        {/* <ItemsProvider> */}
+        <CartProvider>
+          <ThemeProvider theme={theme}>
+            {/*para importar un tema necesito esto y envolver todo lo que quiera con ese tema, theme es el nombre de mi tema*/}
+            <NavBar />
+            <Header
+              title={'F-STORE'}
+              subtitle={'All you need in one place'}
+            />
+            <Container maxWidth='lg'>
+              <Routes>
+                <Route
+                  path='/'
+                  element={<ItemListContainer />}
+                />
 
-          <Container maxWidth='lg'>
-            <Routes>
-              <Route
-                path='/'
-                element={<ItemListContainer />}
-              />
+                <Route
+                  path='/category/:categoryId'
+                  element={<ItemListContainer />}
+                />
+                <Route
+                  path='/item/:id'
+                  element={<ItemDetailContainer />}
+                />
+                <Route
+                  path='/cart'
+                  element={<Cart />}
+                />
+              </Routes>
+            </Container>
 
-              <Route
-                path='/category/:categoryId'
-                element={<ItemListContainer />}
-              />
-              <Route
-                path='/item/:id'
-                element={<ItemDetailContainer />}
-              />
-            </Routes>
-          </Container>
-
-          {/* </Container> */}
-        </ThemeProvider>
+            {/* </Container> */}
+          </ThemeProvider>
+        </CartProvider>
+        {/* </ItemsProvider> */}
+        {/* con esto puedo usar el context de cart en toda la app */}
       </Router>
-      ;
+      <Footer />
     </>
   );
 };

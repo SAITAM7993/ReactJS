@@ -85,11 +85,18 @@ const ProductCard = ({
       </CardContent>
 
       <CardActions className='card__actions'>
-        <ItemActions
+        {/* <ItemActions
           initial={1}
           stock={stock}
           onAdd={(quantity) => console.log('cantidad agregada ', quantity)}
-        />
+          product={product}
+        /> */}
+        <ItemActions
+          id={id}
+          title={title}
+          price={price}
+          stock={50}
+        ></ItemActions>
       </CardActions>
     </Card>
   );

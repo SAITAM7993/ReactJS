@@ -42,8 +42,11 @@ const ItemDetail = ({ product }) => {
               {/* con este op ternario espero a que cargue la img y luego la renderizo, sino rompia  */}
               {product.images &&
                 product.images.map((image) => (
-                  <ImageListItem key={image.img}>
-                    <img src={image}></img>
+                  <ImageListItem key={image}>
+                    <img
+                      src={image}
+                      alt={product.title}
+                    ></img>
                   </ImageListItem>
                 ))}
             </ImageList>
@@ -62,11 +65,18 @@ const ItemDetail = ({ product }) => {
             item
             xl={3}
           >
-            <ItemActions
+            {/* <ItemActions
               initial={1}
               stock={10}
               onAdd={(quantity) => console.log('cantidad agregada ', quantity)}
-            />
+              product={product}
+            /> */}
+            <ItemActions
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              stock={50}
+            ></ItemActions>
           </Grid>
         </Grid>
       </Box>

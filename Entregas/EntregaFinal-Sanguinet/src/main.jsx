@@ -5,7 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline'; //importo cssbaseline para 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <CssBaseline />
-    <App />
+    <CssBaseline>
+      <App />
+    </CssBaseline>
   </React.StrictMode>
 );
