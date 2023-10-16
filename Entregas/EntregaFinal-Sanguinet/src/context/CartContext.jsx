@@ -41,12 +41,18 @@ export const CartProvider = ({ children }) => {
     let sum = cart.reduce((acc, curr) => acc + curr.quantity, 0);
     return sum;
   };
+
+  //retorno la cantidad de items en el carrito
+  const cartTotal = () => {
+    let sum = cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+    return sum;
+  };
   //acc acumulador, curr el actual, inicio en 0, retorno la cantidad total (quantity)
 
   //con el provider comparto todas las funciones
   return (
     <CartContext.Provider
-      value={{ cart, addItem, removeItem, clearCart, cartQuantity }}
+      value={{ cart, addItem, removeItem, clearCart, cartQuantity, cartTotal }}
     >
       {children}
     </CartContext.Provider>

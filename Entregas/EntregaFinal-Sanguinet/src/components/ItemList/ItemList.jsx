@@ -27,7 +27,6 @@ const ItemList = ({ products }) => {
         return (
           <Grid
             item
-            container
             direction='column'
             display='flex'
             justify='center'

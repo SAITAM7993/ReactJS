@@ -24,7 +24,7 @@ import { CartProvider } from './context/CartContext';
 // import { ItemsProvider } from './context/ItemsContext';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-import Cart from './components/CheckOut/Cart';
+import Cart from './components/Cart/Cart';
 //import NotFound from './pages/ErrorPage/NotFound';
 
 const App = () => {

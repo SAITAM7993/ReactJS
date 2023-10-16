@@ -4,7 +4,7 @@ import Badge from '@mui/material/Badge';
 import { Tooltip } from '@mui/material';
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
-
+import { Link } from 'react-router-dom';
 //tomo la cantidad de items del context
 
 const CartWidget = () => {
@@ -13,19 +13,21 @@ const CartWidget = () => {
   return (
     <>
       {/* para poner un tooltip tengo que englobar el icono que quiero tooltipear */}
-      <Tooltip title='Cart'>
-        <IconButton
-          aria-label='show 4 new mails'
-          color='inherit'
-        >
-          <Badge
-            badgeContent={cartQuantity()}
-            color='secondary'
+      <Link to='/cart'>
+        <Tooltip title='Cart'>
+          <IconButton
+            aria-label='show 4 new mails'
+            color='inherit'
           >
-            <ShoppingCart />
-          </Badge>
-        </IconButton>
-      </Tooltip>
+            <Badge
+              badgeContent={cartQuantity()}
+              color='secondary'
+            >
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
+        </Tooltip>
+      </Link>
     </>
   );
 };
