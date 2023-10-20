@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Button, Typography, Stack } from '@mui/material';
 /* Este componente llama a la api para obtener la lista de productos, llama a ItemList que carga las cards y los lista en una grilla */
-
+import CartItem from '../CartItem/CartItem';
 import { CartContext } from '../../context/CartContext';
 import Grid from '@mui/material/Grid';
 // import CartItem from '../CartItem/CartItem';
@@ -32,13 +32,45 @@ const Cart = () => {
     <>
       <Grid
         container
+        spacing={2}
+        display='flex'
+        direction='column'
+        justifyContent='center'
+      >
+        {cartProducts.map((p) => (
+          <Grid
+            item
+            lg={12}
+            key={p.id}
+          >
+            <CartItem cartItem={p} />
+          </Grid>
+        ))}
+      </Grid>
+      {/* 
+      // esto anda
+      {cartProducts.map((product) => (
+        <div key={`prod-${product.id}`}>
+          {product.title}-{product.price}-{product.quantity}
+          total: {cartQuantity()}-{cartTotal()}
+        </div>
+      ))} */}
+    </>
+  );
+};
+export default Cart;
+
+{
+  /* esto rompe ...
+<Grid
+        container
         className='ProductList'
         display='flex'
         justifyContent='center'
         spacing={3}
       >
-        {/*mapeo los items del carrito */}
-        {cart.map((p) => (
+      
+        {cartProducts.map((p) => (
           <Grid
             item
             direction='column'
@@ -50,7 +82,7 @@ const Cart = () => {
             xs={12}
             key={p.id}
           >
-            {/* <CartItem {...p} /> */}
+            <CartItem {...cartProducts} />
           </Grid>
         ))}
         <Grid
@@ -84,14 +116,5 @@ const Cart = () => {
             </Link>
           }
         </Grid>
-      </Grid>
-      {/* {cartProducts.map((product) => (
-        <div key={`prod-${product.id}`}>
-          {product.title}-{product.price}-{product.quantity}
-          //total: {cartQuantity()}-{cartTotal()}
-        </div>
-      ))} */}
-    </>
-  );
-};
-export default Cart;
+      </Grid> */
+}
