@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 export default function Footer() {
   return (
     <Box
-      mt={5}
+      mt={10}
       component='footer'
       sx={{
         position: 'sticky',
@@ -22,7 +22,7 @@ export default function Footer() {
       <Container maxWidth='lg'>
         <Grid
           container
-          spacing={10}
+          spacing={15}
         >
           <Grid
             item

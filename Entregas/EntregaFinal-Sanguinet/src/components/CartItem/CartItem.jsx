@@ -1,8 +1,10 @@
-import Typography from '@mui/material/Typography';
+import { useContext } from 'react';
 import Grid from '@mui/material/Grid';
-
+import Button from '@mui/material/Button';
+import { CartContext } from '../../context/CartContext';
+import ClearIcon from '@mui/icons-material/Clear';
 const CartItem = ({ cartItem }) => {
-  console.log(cartItem);
+  const { removeItem } = useContext(CartContext);
   return (
     <>
       <Grid
@@ -10,7 +12,6 @@ const CartItem = ({ cartItem }) => {
         display='flex'
         direction='row'
         justifyContent='center'
-        spacing={2}
       >
         <Grid
           item
@@ -22,30 +23,49 @@ const CartItem = ({ cartItem }) => {
         </Grid>
         <Grid
           item
-          lg={2}
-          md={2}
-          xs={2}
+          lg={1}
+          md={1}
+          xs={1}
         >
-          {cartItem.quantity}
-        </Grid>
-        <Grid
-          item
-          lg={2}
-          md={2}
-          xs={2}
-        >
-          ${cartItem.price}
+          Qty: {cartItem.quantity}
         </Grid>
         <Grid
           item
           lg={3}
-          md={2}
+          md={3}
           xs={3}
         >
-          QUITAR
+          Price: ${cartItem.price}
+        </Grid>
+        <Grid
+          item
+          lg={2}
+          md={2}
+          xs={2}
+        >
+          SubTotal: ${cartItem.price * cartItem.quantity}
+        </Grid>
+        <Grid
+          item
+          textAlign='right'
+          lg={2}
+          md={2}
+          xs={2}
+        >
+          <Button
+            key={cartItem.id + '-cartItemButton'}
+            variant='text'
+            sx={{ boxShadow: 'none' }}
+            size='small'
+            startIcon={<ClearIcon />}
+            onClick={() => removeItem(cartItem.id)}
+          >
+            Remove
+          </Button>
         </Grid>
       </Grid>
     </>
   );
 };
 export default CartItem;
+// onClick={() => removeItem(cartItem.id)} con la arrow func ()=> hago que se ejecute en el click y no en el mount/load

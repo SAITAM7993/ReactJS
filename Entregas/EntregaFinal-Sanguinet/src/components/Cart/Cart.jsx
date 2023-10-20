@@ -4,35 +4,51 @@ import { Button, Typography, Stack } from '@mui/material';
 import CartItem from '../CartItem/CartItem';
 import { CartContext } from '../../context/CartContext';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 // import CartItem from '../CartItem/CartItem';
 import { Link } from 'react-router-dom';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import Divider from '@mui/material/Divider';
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
-
   const { cart, cartQuantity, cartTotal, clearCart } = useContext(CartContext);
-
-  console.log(cart);
-
   useEffect(() => {
     setCartProducts(cart);
   }, [cart]);
 
-  /* segun lo seleccionado hago una llamada a la api para obtener una categoria o todos */
-  console.log(cartProducts);
-
   if (cartQuantity() === 0) {
     return (
-      <div>
-        <h1>NO hay items</h1>
-      </div>
+      <Box
+        p={'10%'}
+        sx={{
+          width: '100%',
+        }}
+      >
+        <Typography
+          variant='h4'
+          color='initial'
+          align='center'
+        >
+          No items in cart
+        </Typography>
+      </Box>
     );
   }
 
   return (
     <>
+      <Typography
+        variant='h2'
+        color='initial'
+        align='center'
+      >
+        Cart
+      </Typography>
       <Grid
+        my={5}
         container
-        spacing={2}
+        spacing={1}
         display='flex'
         direction='column'
         justifyContent='center'
@@ -40,21 +56,63 @@ const Cart = () => {
         {cartProducts.map((p) => (
           <Grid
             item
-            lg={12}
             key={p.id}
           >
             <CartItem cartItem={p} />
+            <Divider />
           </Grid>
         ))}
+        <Grid
+          item
+          mb={5}
+          lg={3}
+        >
+          <Typography
+            variant='h6'
+            color='initial'
+            align='left'
+          >
+            Total ${cartTotal()}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          lg={12}
+          display='flex'
+          direction='column'
+          justifyContent='center'
+        >
+          <Button
+            variant='outlined'
+            size='medium'
+            color='primary'
+            sx={{ boxShadow: 'none' }}
+            onClick={() => clearCart()}
+            startIcon={<DeleteForeverIcon />}
+          >
+            Clear cart
+          </Button>
+        </Grid>
+        <Grid
+          item
+          lg={12}
+          display='flex'
+          direction='column'
+          justifyContent='center'
+        >
+          <Button
+            variant='contained'
+            size='large'
+            color='success'
+            sx={{
+              boxShadow: 'none',
+            }}
+            startIcon={<MonetizationOnIcon />}
+          >
+            Check out
+          </Button>
+        </Grid>
       </Grid>
-      {/* 
-      // esto anda
-      {cartProducts.map((product) => (
-        <div key={`prod-${product.id}`}>
-          {product.title}-{product.price}-{product.quantity}
-          total: {cartQuantity()}-{cartTotal()}
-        </div>
-      ))} */}
     </>
   );
 };

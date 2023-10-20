@@ -4,6 +4,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import './ItemActions.css'; //de esta manera se improta CSS
 const ItemActions = ({ id, title, price }) => {
   // const ItemActions = ({ stock, initial, onAdd }) => {
   const initial = 1; //1
@@ -23,7 +24,6 @@ const ItemActions = ({ id, title, price }) => {
       price,
       quantity,
     };
-    console.log(item);
     addItem(item, quantity); //le paso el item y la cantidad
   };
 
@@ -53,7 +53,7 @@ const ItemActions = ({ id, title, price }) => {
         spacing={{ xs: 1, xl: 2 }}
       >
         <Button
-          variant='contained'
+          variant='outlined'
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           size='small'
           onClick={decrement}
@@ -70,7 +70,7 @@ const ItemActions = ({ id, title, price }) => {
         </Typography>
         <Button
           className='actionButton'
-          variant='contained'
+          variant='outlined'
           size='small'
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           onClick={increment}
@@ -90,22 +90,25 @@ const ItemActions = ({ id, title, price }) => {
         >
           Add to cart
         </Button>
-        <Link
-          to='/cart'
-          className='Option'
+
+        <Button
+          variant='contained'
+          size='small'
+          color='success'
+          sx={{ boxShadow: 'none', flexGrow: 1 }}
+          disabled={!stock}
+          startIcon={<ShoppingCartIcon />}
         >
-          <Button
-            variant='contained'
-            size='small'
-            color='success'
-            sx={{ boxShadow: 'none', flexGrow: 1 }}
-            onClick={() => {}}
-            disabled={!stock}
-            startIcon={<ShoppingCartIcon />}
+          <Link
+            to='/cart'
+            className='BuyNowLink'
+            onClick={() => {
+              handleOnAdd(quantity);
+            }}
           >
             BUY NOW
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </Stack>
 
       {/* agregar al carrito, va a ejecutar como callback la funcion recibida por prop y se le pasa cmo argumento la cantidad, en caso de no tener stock lo deshabilitamos con disabled !stock  */}
