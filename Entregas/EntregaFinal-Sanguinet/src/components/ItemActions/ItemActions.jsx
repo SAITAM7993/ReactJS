@@ -57,6 +57,7 @@ const ItemActions = ({ id, title, price }) => {
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           size='small'
           onClick={decrement}
+          disabled={!stock}
         >
           -
         </Button>
@@ -72,6 +73,7 @@ const ItemActions = ({ id, title, price }) => {
           className='actionButton'
           variant='outlined'
           size='small'
+          disabled={!stock}
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           onClick={increment}
         >
@@ -80,7 +82,7 @@ const ItemActions = ({ id, title, price }) => {
         <Button
           variant='contained'
           size='small'
-          color='success'
+          color='primary'
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           onClick={() => {
             handleOnAdd(quantity);

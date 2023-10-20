@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import { getProducts } from '../../api/getProducts';
 import ItemList from '../ItemList/ItemList';
 import { getProductsByCategoryId } from '../../api/getProductsByCategoryId';
-
+import Title from '../Title/Title';
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   let { categoryId } = useParams();
@@ -23,6 +23,8 @@ const ItemListContainer = () => {
 
   return (
     <>
+      <Title title={categoryId} />
+
       <Grid
         container
         className='ProductList'

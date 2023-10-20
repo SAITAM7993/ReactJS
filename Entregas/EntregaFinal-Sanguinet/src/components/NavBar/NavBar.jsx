@@ -106,7 +106,7 @@ const NavBar = () => {
             <MenuIcon
               sx={{
                 color: 'white',
-                display: { md: 'none', sm: 'flex' },
+                display: { xs: 'flex', lg: 'none' },
               }}
               onClick={() => setOpen(true)}
             />
@@ -121,7 +121,7 @@ const NavBar = () => {
         open={open}
         anchor='left'
         onClose={() => setOpen(false)}
-        sx={{ display: { sm: 'flex', md: 'none' } }}
+        sx={{ display: { xs: 'flex', lg: 'none' } }}
       >
         {/*esto lo hago para que si pasa a una tablet o gira el cel por ej no muestre el drawer*/}
         <NavListDrawer navLinks={navLinks} />

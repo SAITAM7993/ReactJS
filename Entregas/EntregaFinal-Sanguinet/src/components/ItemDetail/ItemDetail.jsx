@@ -2,75 +2,63 @@ import Typography from '@mui/material/Typography';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ItemActions from '../ItemActions/ItemActions';
-
-import { Box } from '@mui/material';
+import Title from '.././Title/Title.jsx';
 import Grid from '@mui/material/Grid';
 
 const ItemDetail = ({ product }) => {
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Title title={product.title}></Title>
+      <Grid
+        container
+        spacing={2}
+        direction='column'
+        alignItems='left'
+        justifyContent='center'
+      >
+        <Grid item>
+          <Typography
+            variant='body1'
+            color='initial'
+          >
+            {product.description}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography
+            variant='h4'
+            color='initial'
+            component='p'
+          >
+            ${product.price}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <ImageList cols={3}>
+            {/* con este op ternario espero a que cargue la img y luego la renderizo, sino rompia  */}
+            {product.images &&
+              product.images.map((image) => (
+                <ImageListItem key={image}>
+                  <img
+                    src={image}
+                    alt={product.title}
+                  ></img>
+                </ImageListItem>
+              ))}
+          </ImageList>
+        </Grid>
+
         <Grid
           container
           spacing={2}
-          direction='column'
+          direction='row'
           alignItems='center'
           justifyContent='center'
         >
-          <Grid item>
-            <Typography
-              variant='h4'
-              color='initial'
-              component='p'
-              my={2}
-            >
-              {product.title}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant='body1'
-              color='initial'
-              my={2}
-            >
-              {product.description}
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            <ImageList cols={3}>
-              {/* con este op ternario espero a que cargue la img y luego la renderizo, sino rompia  */}
-              {product.images &&
-                product.images.map((image) => (
-                  <ImageListItem key={image}>
-                    <img
-                      src={image}
-                      alt={product.title}
-                    ></img>
-                  </ImageListItem>
-                ))}
-            </ImageList>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant='h4'
-              color='initial'
-              component='p'
-              my={2}
-            >
-              ${product.price}
-            </Typography>
-          </Grid>
           <Grid
             item
             xl={3}
           >
-            {/* <ItemActions
-              initial={1}
-              stock={10}
-              onAdd={(quantity) => console.log('cantidad agregada ', quantity)}
-              product={product}
-            /> */}
             <ItemActions
               id={product.id}
               title={product.title}
@@ -79,7 +67,7 @@ const ItemDetail = ({ product }) => {
             ></ItemActions>
           </Grid>
         </Grid>
-      </Box>
+      </Grid>
     </>
   );
 };
