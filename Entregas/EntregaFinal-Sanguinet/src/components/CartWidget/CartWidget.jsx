@@ -22,7 +22,14 @@ const CartWidget = () => {
           title='View cart'
           arrow
         >
-          <IconButton sx={{ color: { xs: 'primary', lg: 'white' } }}>
+          {/* VER SI VALE LA PENA OCULTAR EL CARRITO CUANDO NO HAY ITEMS
+          display: {{cartQuantity()} > 0 ? 'block' : 'none'} }
+          */}
+          <IconButton
+            sx={{
+              color: { xs: 'primary', lg: 'white' },
+            }}
+          >
             <Badge
               badgeContent={cartQuantity()}
               color='secondary'

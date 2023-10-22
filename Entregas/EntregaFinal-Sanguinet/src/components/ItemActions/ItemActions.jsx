@@ -103,7 +103,7 @@ const ItemActions = ({ id, title, price }) => {
         >
           <Link
             to='/cart'
-            className='BuyNowLink'
+            className='customLink'
             onClick={() => {
               handleOnAdd(quantity);
             }}

@@ -5,7 +5,7 @@ const Title = ({ title }) => {
       <Typography
         variant='h2'
         color='initial'
-        align='Left'
+        align='left'
         my={4}
       >
         {title}

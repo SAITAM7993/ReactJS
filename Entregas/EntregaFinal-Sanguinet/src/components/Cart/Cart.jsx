@@ -139,7 +139,12 @@ const Cart = () => {
             }}
             startIcon={<MonetizationOnIcon />}
           >
-            Check out
+            <Link
+              to='/checkout'
+              className='customLink'
+            >
+              Check Out
+            </Link>
           </Button>
         </Grid>
       </Grid>

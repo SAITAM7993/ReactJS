@@ -10,6 +10,7 @@ import { Container, ThemeProvider } from '@mui/material'; //de esta manera puedo
 import NavBar from './components/NavBar/NavBar';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import CheckOut from './components/CheckOut/CheckOut';
 //mi tema personalizado
 import theme from './theme/theme';
 import './App.css';
@@ -58,6 +59,10 @@ const App = () => {
                 <Route
                   path='/cart'
                   element={<Cart />}
+                />
+                <Route
+                  path='/checkout'
+                  element={<CheckOut />}
                 />
               </Routes>
             </Container>
