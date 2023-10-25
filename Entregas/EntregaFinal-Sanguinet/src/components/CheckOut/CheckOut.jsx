@@ -1,84 +1,174 @@
 import { FormControl, TextField, Button } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { CartContext } from '../../context/CartContext';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 import Title from '../Title/Title';
+import Grid from '@mui/material/Grid';
+import Message from '../Message/Message';
+import { Link } from 'react-router-dom';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import HomeIcon from '@mui/icons-material/Home';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+const initialState = {
+  name: '',
+  email: '',
+  email2: '',
+  phone: '',
+};
 
 const CheckOut = () => {
-  const [email, setEmail] = useState();
-  //func para validar campos
-  const [error, setError] = useState({
-    error: false,
-    message: '',
-  });
+  const [cartProducts, setCartProducts] = useState([]);
+  const { cart, clearCart, cartQuantity } = useContext(CartContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); //para que no haga el reload
-    console.log(e.target);
+  const [values, setValues] = useState(initialState); //un estado para manejar todos los valores ingresados a la vez
+  const [purchaseId, setPurchaseId] = useState(''); //para guardar el nro de order
+  const handleOnChange = (e) => {
+    const { value, name } = e.target;
+    setValues({ ...values, [name]: value });
+    //recibo un objeto con todo lo que estoy escribiendo en values
   };
 
+  useEffect(() => {
+    setCartProducts(cart);
+  }, [cart]);
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    //genero la ordenen firebase
+    const docRef = await addDoc(collection(db, 'orders'), {
+      values,
+      cartProducts,
+    });
+    setValues(initialState); //limpio los campos
+    setPurchaseId(docRef.id); //guardo el nro de orden
+    clearCart(); //limpio el carrito porque ya se lo mande en cartProducts
+  };
+
+  //values es un bojeto, entonces ya se lo pasa entero
   return (
     <>
       <Title title='Check out' />
-
       <FormControl
         component='form'
         fullWidth
         defaultValue=''
-        onSubmit={handleSubmit}
-        autocomplete='off'
+        onSubmit={handleOnSubmit}
+        autoComplete='off'
       >
         <TextField
-          sx={{ mb: 3 }}
+          name='name'
           id='form-name'
+          required
+          value={values.name}
+          onChange={handleOnChange}
           type='text'
           color='primary'
           label='Your full name'
-          required
-          //   value={name}
-          //   onChange={(e) => setName(e.target.value)}
-          //   helperText={!name ? 'Name is required' : null}
-          //   error={!name}
+          sx={{ mb: 3 }}
         />
         <TextField
-          sx={{ mb: 3 }}
+          name='email'
           id='form-email'
+          value={values.email}
+          onChange={handleOnChange}
           type='email'
           color='primary'
           label='Your e-mail'
           required
-          value={email}
-          helperText={error.message}
-          onChange={(e) => setEmail(e.target.value)}
-          error={error.error}
+          sx={{ mb: 3 }}
         />
         <TextField
-          sx={{ mb: 3 }}
+          name='email2'
           id='form-email-2'
+          required
+          value={values.email2}
+          onChange={handleOnChange}
           type='text'
           color='primary'
           label='Repeat your e-mail'
-          required
-          //   value={mailB}
-          //   helperText={!mailB ? 'Name is required' : null}
-          //   onChange={(e) => setMailB(e.target.value)}
-          //   error={!mailB}
+          sx={{ mb: 3 }}
         />
         <TextField
-          sx={{ mb: 3 }}
+          name='phone'
           id='form-phone'
+          required
+          value={values.phone}
+          onChange={handleOnChange}
+          sx={{ mb: 3 }}
           type='text'
           color='primary'
           label='Phone'
-          required
         />
         <Button
           type='submit'
           variant='contained'
           color='primary'
+          size='large'
+          disabled={cartQuantity() === 0}
           sx={{ boxShadow: 'none', flexGrow: 1 }}
+          startIcon={<MonetizationOnIcon />}
         >
-          Submit
+          GENERATE ORDER
         </Button>
       </FormControl>
+      <Grid
+        my={1}
+        container
+        spacing={2}
+        display='flex'
+        direction='column'
+        justifyContent='center'
+      >
+        <Grid
+          item
+          lg={12}
+          display='flex'
+          justifyContent='right'
+        >
+          <Link
+            to='/cart'
+            className='customLink'
+          >
+            <Button
+              variant='outlined'
+              size='medium'
+              color='primary'
+              disabled={cartQuantity() === 0}
+              sx={{
+                boxShadow: 'none',
+                marginLeft: 2,
+              }}
+              startIcon={<ShoppingCart />}
+            >
+              Back to cart
+            </Button>
+          </Link>
+          <Link
+            to='/category/all'
+            className='customLink'
+          >
+            <Button
+              variant='outlined'
+              size='medium'
+              color='primary'
+              sx={{
+                boxShadow: 'none',
+                marginLeft: 2,
+              }}
+              startIcon={<HomeIcon />}
+            >
+              Back to home
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+      {purchaseId && (
+        <Message
+          type='success'
+          message={`Order [ ${purchaseId} ] - generated successfully`}
+        />
+      )}
+      {/* si purchaseId no es vacío, muestro el mensaje*/}
     </>
   );
 };

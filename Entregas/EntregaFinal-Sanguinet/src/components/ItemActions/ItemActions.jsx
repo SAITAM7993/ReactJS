@@ -5,10 +5,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import './ItemActions.css'; //de esta manera se improta CSS
-const ItemActions = ({ id, title, price }) => {
+import Message from '../Message/Message';
+const ItemActions = ({ id, title, price, stock }) => {
   // const ItemActions = ({ stock, initial, onAdd }) => {
   const initial = 1; //1
-  const stock = 10;
   const [quantity, setQuantity] = useState(initial);
   const [quantityAdded, setQuantityAdded] = useState(0);
 
@@ -16,7 +16,6 @@ const ItemActions = ({ id, title, price }) => {
 
   const handleOnAdd = (quantity) => {
     setQuantityAdded(quantity);
-
     //armo el objeto para el carrito
     const item = {
       id,
@@ -24,7 +23,8 @@ const ItemActions = ({ id, title, price }) => {
       price,
       quantity,
     };
-    addItem(item, quantity); //le paso el item y la cantidad
+    addItem(item, quantity);
+    //le paso el item y la cantidad
   };
 
   const increment = () => {
@@ -53,7 +53,7 @@ const ItemActions = ({ id, title, price }) => {
         spacing={{ xs: 1, xl: 2 }}
       >
         <Button
-          variant='outlined'
+          variant='contained'
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           size='small'
           onClick={decrement}
@@ -71,7 +71,7 @@ const ItemActions = ({ id, title, price }) => {
         </Typography>
         <Button
           className='actionButton'
-          variant='outlined'
+          variant='contained'
           size='small'
           disabled={!stock}
           sx={{ boxShadow: 'none', flexGrow: 1 }}
@@ -80,39 +80,37 @@ const ItemActions = ({ id, title, price }) => {
           +
         </Button>
         <Button
-          variant='contained'
+          variant='outlined'
           size='small'
           color='primary'
           sx={{ boxShadow: 'none', flexGrow: 1 }}
           onClick={() => {
             handleOnAdd(quantity);
-          }} //hacer que sete en context
+          }}
           disabled={!stock}
           startIcon={<AddShoppingCartIcon />}
         >
           Add to cart
         </Button>
-
-        <Button
-          variant='contained'
-          size='small'
-          color='success'
-          sx={{ boxShadow: 'none', flexGrow: 1 }}
-          disabled={!stock}
-          startIcon={<ShoppingCartIcon />}
+        <Link
+          to='/cart'
+          className={!stock ? 'disableLink' : null}
+          onClick={() => {
+            handleOnAdd(quantity);
+          }}
         >
-          <Link
-            to='/cart'
-            className='customLink'
-            onClick={() => {
-              handleOnAdd(quantity);
-            }}
+          <Button
+            variant='contained'
+            size='small'
+            color='primary'
+            sx={{ boxShadow: 'none', flexGrow: 1 }}
+            disabled={!stock}
+            startIcon={<ShoppingCartIcon />}
           >
             BUY NOW
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </Stack>
-
       {/* agregar al carrito, va a ejecutar como callback la funcion recibida por prop y se le pasa cmo argumento la cantidad, en caso de no tener stock lo deshabilitamos con disabled !stock  */}
     </>
   );

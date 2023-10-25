@@ -9,7 +9,8 @@ import {
 
 import './NavBar.css';
 import { Link } from 'react-router-dom';
-import LoginIcon from '@mui/icons-material/Login'; //CAMBIAR LUEGO
+import InfoIcon from '@mui/icons-material/Info';
+import MailIcon from '@mui/icons-material/Mail';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
@@ -17,39 +18,19 @@ import NavListDrawer from './NavListDrawer';
 import CartWidget from '../CartWidget/CartWidget';
 
 import { Search, SearchIconWrapper, StyledInputBase } from './NavBarSearch';
-
+import MenuList from '../MenuList/MenuList';
 /******************** PARM ENTRADA DE NAVBAR ********************/
 //lista de objetos link para user en el navlist
 export const navLinks = [
   {
-    title: 'ALL',
-    path: '/category/0',
-    icon: <LoginIcon />,
+    title: 'ABOUT',
+    icon: <InfoIcon />,
+    path: '/about',
   },
   {
-    title: 'CLOTHES',
-    path: '/category/1',
-    icon: <LoginIcon />,
-  },
-  {
-    title: 'ELECTRONICS',
-    path: '/category/2',
-    icon: <LoginIcon />,
-  },
-  {
-    title: 'FORNITURE',
-    path: '/category/3',
-    icon: <LoginIcon />,
-  },
-  {
-    title: 'SHOES ',
-    path: '/category/4',
-    icon: <LoginIcon />,
-  },
-  {
-    title: 'OTHERS ',
-    path: '/category/5',
-    icon: <LoginIcon />,
+    title: 'CONTACT',
+    icon: <MailIcon />,
+    path: '/contact',
   },
 ];
 
@@ -76,9 +57,15 @@ const NavBar = () => {
               {brand} {/* le paso la marca */}
             </Link>
           </Typography>
-
+          <Box sx={{ display: { lg: 'flex', marginRight: 15 } }}>
+            <MenuList></MenuList>{' '}
+            {/* componente que trae las categorias desde firebase */}
+          </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {/* con esto lo oculto cuando es MUY pequeño (mobile) y lo muestro cuando es mas grande (sm), lo uso tambien en menuicon para ocultarlo en vistas desktop pero invertido, abajo recorro los navlinks que le pase y los cargo*/}
+            {/* con esto lo oculto cuando es MUY pequeño (mobile) y lo muestro
+            cuando es mas grande (sm), lo uso tambien en menuicon para ocultarlo
+            en vistas desktop pero invertido, abajo recorro los navlinks que le
+            pase y los cargo */}
             {navLinks.map((item) => (
               <Link
                 className='li'
@@ -98,6 +85,7 @@ const NavBar = () => {
               />
             </Search>
           </Box>
+
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <CartWidget />
           </Box>
@@ -145,4 +133,5 @@ const NavBar = () => {
           ))}
 con esto recorro y creo un button con cada titulo de la lista de titulos
 */
+
 export default NavBar;

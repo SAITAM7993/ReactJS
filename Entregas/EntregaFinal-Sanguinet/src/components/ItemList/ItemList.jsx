@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 /*
 product items
 {
-    "id": 4,
+    "id": 434123dsf,
     "title": "Handmade Fresh Table",
     "price": 687,
     "description": "Andy shoes are designed to keeping in...",
@@ -49,4 +49,3 @@ const ItemList = ({ products }) => {
   );
 };
 export default ItemList;
-/* por ahora stock siempre 10, la api no tenia el atr stock */

@@ -3,10 +3,10 @@ const Title = ({ title }) => {
   return (
     <>
       <Typography
-        variant='h2'
+        variant='h4'
         color='initial'
         align='left'
-        my={4}
+        my={5}
       >
         {title}
       </Typography>

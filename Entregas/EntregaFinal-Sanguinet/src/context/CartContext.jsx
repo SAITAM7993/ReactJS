@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-
+import Message from '../components/Message/Message';
 //creo el context
 export const CartContext = createContext({
   cart: [],
@@ -8,16 +8,15 @@ export const CartContext = createContext({
 //creo la funcion cartprovider que contiene toda la logica del carrito de compras, es un componente de alto orden
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-
-  console.log(cart);
-
   //agregar item
   const addItem = (item, quantity) => {
+    let error = false;
     if (!isInCart(item.id)) {
       setCart((prev) => [...prev, { ...item, quantity }]);
     } else {
-      console.error('El producto ya fue agregado');
+      error = true;
     }
+    return error;
   };
 
   //quitar item

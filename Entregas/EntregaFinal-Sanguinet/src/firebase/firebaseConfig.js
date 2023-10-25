@@ -1,13 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
+//utilizo variables de env.
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyDIIQT-pb17jlqiNxlkvxijRF_KYzGKcAM',
-  authDomain: 'fb-reactjs-entregafinal.firebaseapp.com',
-  projectId: 'fb-reactjs-entregafinal',
-  storageBucket: 'fb-reactjs-entregafinal.appspot.com',
-  messagingSenderId: '528116929621',
-  appId: '1:528116929621:web:31a3369473599214b130dc',
+  apiKey: import.meta.env.VITE_APP_apiKey,
+  authDomain: import.meta.env.VITE_APP_authDomain,
+  projectId: import.meta.env.VITE_APP_projectId,
+  storageBucket: import.meta.env.VITE_APP_storageBucket,
+  messagingSenderId: import.meta.env.VITE_APP_messagingSenderId,
+  appId: import.meta.env.VITE_APP_appId,
 };
 
 // Initialize Firebase

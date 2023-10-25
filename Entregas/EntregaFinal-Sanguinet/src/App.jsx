@@ -24,6 +24,9 @@ import { CartProvider } from './context/CartContext';
 // import { ItemsProvider } from './context/ItemsContext';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
+
+import About from './components/Views/About/About';
+import Contact from './components/Views/Contact/Contact';
 import Cart from './components/Cart/Cart';
 //import NotFound from './pages/ErrorPage/NotFound';
 
@@ -63,6 +66,14 @@ const App = () => {
                 <Route
                   path='/checkout'
                   element={<CheckOut />}
+                />
+                <Route
+                  path='/about'
+                  element={<About />}
+                />
+                <Route
+                  path='/contact'
+                  element={<Contact />}
                 />
               </Routes>
             </Container>

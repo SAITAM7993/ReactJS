@@ -47,7 +47,15 @@ const ItemDetail = ({ product }) => {
               ))}
           </ImageList>
         </Grid>
-
+        <Grid item>
+          <Typography
+            variant='body1'
+            component='p'
+            color={product.stock == 0 ? 'error' : null}
+          >
+            {product.stock != 0 ? `Stock : ${product.stock}` : 'Out of stock'}
+          </Typography>
+        </Grid>
         <Grid
           container
           spacing={2}
@@ -63,7 +71,7 @@ const ItemDetail = ({ product }) => {
               id={product.id}
               title={product.title}
               price={product.price}
-              stock={50}
+              stock={product.stock}
             ></ItemActions>
           </Grid>
         </Grid>

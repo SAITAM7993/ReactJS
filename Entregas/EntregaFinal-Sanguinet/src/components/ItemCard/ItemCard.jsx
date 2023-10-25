@@ -48,9 +48,9 @@ const ProductCard = ({
           gutterBottom
           variant='body2'
           component='p'
-          color='text.secondary'
+          color='secondary'
         >
-          {category}
+          {category.toUpperCase()}
         </Typography>
         <Typography
           my={1}
@@ -70,8 +70,10 @@ const ProductCard = ({
           my={1}
           variant='body2'
           component='p'
+          color={stock == 0 ? 'error' : null}
         >
-          STOCK: {stock} | ID: {id}
+          {/* con esta condicion dejo en rojo y muestro out of stock si no hay stock */}
+          {stock != 0 ? `Stock : ${stock}` : 'Out of stock'}
         </Typography>
 
         <Typography

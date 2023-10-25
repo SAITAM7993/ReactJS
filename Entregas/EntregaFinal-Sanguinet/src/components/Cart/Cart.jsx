@@ -4,8 +4,6 @@ import { Button, Typography } from '@mui/material';
 
 import { CartContext } from '../../context/CartContext';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-// import CartItem from '../CartItem/CartItem';
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -18,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import ClearIcon from '@mui/icons-material/Clear';
+import NoItemsInCart from '../NoItemsInCart/NoItemsInCart';
 
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
@@ -29,22 +28,7 @@ const Cart = () => {
   }, [cart]);
 
   if (cartQuantity() === 0) {
-    return (
-      <Box
-        p={'10%'}
-        sx={{
-          width: '100%',
-        }}
-      >
-        <Typography
-          variant='h4'
-          color='initial'
-          align='center'
-        >
-          No items in cart
-        </Typography>
-      </Box>
-    );
+    return <NoItemsInCart />;
   }
 
   return (
@@ -52,7 +36,8 @@ const Cart = () => {
       <Title title='CART' />
       <TableContainer>
         <Table
-          sx={{ minWidth: 650 }}
+          align='center'
+          sx={{ minWidth: 700 }}
           aria-label='simple table'
         >
           <TableHead>
@@ -120,7 +105,7 @@ const Cart = () => {
           justifyContent='right'
         >
           <Button
-            variant='text'
+            variant='outlined'
             size='large'
             color='primary'
             sx={{ boxShadow: 'none' }}
@@ -129,23 +114,23 @@ const Cart = () => {
           >
             Clear cart
           </Button>
-          <Button
-            variant='contained'
-            size='large'
-            color='success'
-            sx={{
-              boxShadow: 'none',
-              marginLeft: 2,
-            }}
-            startIcon={<MonetizationOnIcon />}
+          <Link
+            to='/checkout'
+            className='customLink'
           >
-            <Link
-              to='/checkout'
-              className='customLink'
+            <Button
+              variant='contained'
+              size='large'
+              color='primary'
+              sx={{
+                boxShadow: 'none',
+                marginLeft: 2,
+              }}
+              startIcon={<MonetizationOnIcon />}
             >
               Check Out
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </>
